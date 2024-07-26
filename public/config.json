@@ -1,0 +1,712 @@
+{
+  "title": "七日杀配置文件生成器",
+  "description": "包含了全部配置",
+  "form": [
+    {
+      "groupName": "基础设置",
+      "groupValue": "Server representation",
+      "description": "服务器房间基础设置",
+      "formList": [
+        {
+          "name": "ServerName",
+          "showName": "服务器名称",
+          "description": "服务器名称，请自行设置（默认是：My Game Host）",
+          "default": "My Game Host",
+          "type": "INPUT"
+        },
+        {
+          "name": "ServerDescription",
+          "showName": "服务器描述",
+          "default": "",
+          "type": "TEXTAREA"
+        },
+        {
+          "name": "ServerWebsiteURL",
+          "showName": "服务器网站地址",
+          "default": "",
+          "type": "INPUT"
+        },
+        {
+          "name": "ServerPassword",
+          "showName": "服务器密码",
+          "default": "",
+          "type": "INPUT"
+        },
+        {
+          "name": "ServerLoginConfirmationText",
+          "showName": "服务器登录确认信息",
+          "default": "进入游戏后弹出的消息，确认进入游戏",
+          "type": "TEXTAREA"
+        },
+        {
+          "name": "ServerPort",
+          "showName": "服务器端口",
+          "default": 26900,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "ServerVisibility",
+          "showName": "服务器可见",
+          "options": [
+            {
+              "name": "0",
+              "label": "未列出"
+            },
+            {
+              "name": "1",
+              "label": "仅向朋友显示"
+            },
+            {
+              "name": "2",
+              "label": "公共"
+            }
+          ],
+          "default": "2",
+          "type": "SELECT"
+        },
+        {
+          "name": "ServerMaxWorldTransferSpeedKiBs",
+          "showName": "服务最大传输速度",
+          "description": "【未知，请勿乱开】Networking protocols that should not be used. Separated by comma. Possible values: LiteNetLib, SteamNetworking. Dedicated servers should disable SteamNetworking if there is no NAT router in between your users and the server or when port-forwarding is set up correctly",
+          "default": 512,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "ServerDisabledNetworkProtocols",
+          "showName": "服务器禁用网络协议",
+          "description": "Maximum (!) speed in kiB/s the world is transferred at to a client on first connect if it does not have the world yet. Maximum is about 1300 kiB/s, even if you set a higher value",
+          "default": "SteamNetworking",
+          "type": "INPUT"
+        },
+        {
+          "name": "ServerMaxPlayerCount",
+          "showName": "服务器最大人数",
+          "default": 10,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "ServerReservedSlots",
+          "showName": "服务器保留槽数量",
+          "description": "Out of the MaxPlayerCount this many slots can only be used by players with a specific permission level",
+          "default": 0,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "ServerReservedSlotsPermission",
+          "showName": "服务器保留槽权限等级",
+          "description": " Required permission level to use reserved slots above",
+          "default": 100,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "ServerAdminSlots",
+          "showName": "服务器管理员保留槽数量",
+          "description": " This many admins can still join even if the server has reached MaxPlayerCount",
+          "default": 0,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "ServerAdminSlotsPermission",
+          "showName": "服务器管理员槽权限等级",
+          "description": " Required permission level to use the admin slots above",
+          "default": 0,
+          "type": "INPUT_NUMBER"
+        }
+      ]
+    },
+    {
+      "groupName": "管理员设置",
+      "groupValue": "Admin interfaces",
+      "description": "管理员设置",
+      "formList": [
+        {
+          "name": "ControlPanelEnabled",
+          "showName": "启动/禁用Web控制面板",
+          "description": "",
+          "default": false,
+          "type": "SWITCH"
+        },
+        {
+          "name": "ControlPanelPort",
+          "showName": "控制面板网页端口",
+          "description": "49152 到 65535 (Windows) 或 32768 到 61000 (Linux)",
+          "default": 8080,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "ControlPanelPassword",
+          "showName": "进入控制面板的密码",
+          "default": "CHANGEME",
+          "type": "INPUT"
+        },
+        {
+          "name": "TelnetEnabled",
+          "showName": "TelnetEnabled",
+          "description": "",
+          "default": true,
+          "type": "SWITCH"
+        },
+        {
+          "name": "TelnetPort",
+          "showName": "TelnetPort",
+          "description": "",
+          "default": 8081,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "TelnetPassword",
+          "showName": "TelnetPassword",
+          "description": "",
+          "default": "",
+          "type": "INPUT"
+        },
+        {
+          "name": "TelnetFailedLoginLimit",
+          "showName": "TelnetFailedLoginLimit",
+          "description": "在来自单个远程客户端的许多错误密码之后将被阻止连接到Telnet",
+          "default": 10,
+          "type": "SLIDER"
+        },
+        {
+          "name": "TelnetFailedLoginsBlocktime",
+          "showName": "TelnetFailedLoginsBlocktime",
+          "description": "阻止将持续多长时间（以秒为单位",
+          "default": 10,
+          "type": "SLIDER"
+        },
+        {
+          "name": "TerminalWindowEnabled",
+          "showName": "TerminalWindowEnabled",
+          "description": "显示用于日志输出/命令输入的终端窗口",
+          "default": true,
+          "type": "SWITCH"
+        },
+        {
+          "name": "AdminFileName",
+          "showName": "AdminFileName",
+          "description": "服务器管理文件名",
+          "default": "serveradmin.xml",
+          "type": "INPUT"
+        },
+        {
+          "name": "UserDataFolder",
+          "showName": "UserDataFolder",
+          "description": "用户数据文件",
+          "default": "C:\\7 Day BaoCun\\",
+          "type": "INPUT"
+        },
+        {
+          "name": "SaveGameFolder",
+          "showName": "SaveGameFolder",
+          "description": "游戏文件",
+          "default": "C:\\7 Day BaoCun\\",
+          "type": "INPUT"
+        },
+        {
+          "name": "EACEnabled",
+          "showName": "EACEnabled",
+          "description": "启用或禁用ＥＡＣ反作弊，一旦禁用玩家就可以修改文件作弊了",
+          "default": true,
+          "type": "SWITCH"
+        }
+      ]
+    },
+    {
+      "groupName": "游戏设置",
+      "groupValue": "PlayerSetting",
+      "description": "",
+      "formList": [
+        {
+          "name": "GameWorld",
+          "showName": "GameWorld",
+          "description": "GameWorld.description",
+          "default": "Navezgane",
+          "type": "INPUT"
+        },
+        {
+          "name": "WorldGenSeed",
+          "showName": "WorldGenSeed",
+          "description": "WorldGenSeed.description",
+          "default": "asdf",
+          "type": "INPUT"
+        },
+        {
+          "name": "WorldGenSize",
+          "showName": "WorldGenSize",
+          "description": "WorldGenSize.description",
+          "default": 6144,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "GameName",
+          "showName": "GameName",
+          "description": "GameName.description",
+          "default": "MyGame",
+          "type": "INPUT"
+        },
+        {
+          "name": "GameMode",
+          "showName": "GameMode",
+          "description": "GameMode.description",
+          "default": "GameModeSurvival",
+          "type": "INPUT"
+        },
+        {
+          "name": "GameDifficulty",
+          "showName": "GameDifficulty",
+          "description": "GameDifficulty.description",
+          "default": 2,
+          "type": "SLIDER",
+          "min": 0,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "name": "BlockDamagePlayer",
+          "showName": "BlockDamagePlayer",
+          "description": "BlockDamagePlayer.description",
+          "default": 300,
+          "type": "SLIDER",
+          "max": 10000
+        },
+        {
+          "name": "BlockDamageAI",
+          "showName": "BlockDamageAI",
+          "description": "BlockDamageAI.description",
+          "default": 50,
+          "type": "SLIDER"
+        },
+        {
+          "name": "BlockDamageAIBM",
+          "showName": "BlockDamageAIBM",
+          "description": "BlockDamageAIBM.description",
+          "default": 75,
+          "type": "SLIDER"
+        },
+        {
+          "name": "XPMultiplier",
+          "showName": "XPMultiplier",
+          "description": "XPMultiplier.description",
+          "default": 100,
+          "type": "SLIDER",
+          "max": 10000
+        },
+        {
+          "name": "PlayerSafeZoneLevel",
+          "showName": "PlayerSafeZoneLevel",
+          "description": "PlayerSafeZoneLevel.description",
+          "default": 5,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1
+        },
+        {
+          "name": "PlayerSafeZoneHours",
+          "showName": "PlayerSafeZoneHours",
+          "description": "PlayerSafeZoneHours.description",
+          "default": 5,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1
+        },
+        {
+          "name": "BuildCreate",
+          "showName": "BuildCreate",
+          "description": "BuildCreate.description",
+          "default": false,
+          "type": "SWITCH"
+        },
+        {
+          "name": "DayNightLength",
+          "showName": "DayNightLength",
+          "description": "DayNightLength.description",
+          "default": 40,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1
+        },
+        {
+          "name": "DayLightLength",
+          "showName": "DayLightLength",
+          "description": "DayLightLength.description",
+          "default": 18,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1
+        },
+        {
+          "name": "DropOnDeath",
+          "showName": "DropOnDeath",
+          "description": "DropOnDeath.description",
+          "default": "2",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "DropOnQuit.options.noneDrop"
+            },{
+              "name": "1",
+              "label": "DropOnQuit.options.dropAll"
+            },{
+              "name": "2",
+              "label": "DropOnQuit.options.dropOnlyTools"
+            },{
+              "name": "3",
+              "label": "DropOnQuit.options.dropOnlyBag"
+            },{
+              "name": "4",
+              "label": "DropOnQuit.options.deleteAll"
+            }
+          ]
+        },
+        {
+          "name": "DropOnQuit",
+          "showName": "DropOnQuit",
+          "description": "DropOnQuit.description",
+          "default": "2",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "DropOnQuit.options.noneDrop"
+            },{
+              "name": "1",
+              "label": "DropOnQuit.options.dropAll"
+            },{
+              "name": "2",
+              "label": "DropOnQuit.options.dropOnlyTools"
+            },{
+              "name": "3",
+              "label": "DropOnQuit.options.dropOnlyBag"
+            }
+          ]
+        },
+        {
+          "name": "BedrollDeadZoneSize",
+          "showName": "BedrollDeadZoneSize",
+          "description": "BedrollDeadZoneSize.description",
+          "default": 15,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1
+        },
+        {
+          "name": "BedrollExpiryTime",
+          "showName": "BedrollExpiryTime",
+          "description": "BedrollExpiryTime.description",
+          "default": 45,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1
+        },
+        {
+          "name": "MaxSpawnedZombies",
+          "showName": "MaxSpawnedZombies",
+          "description": "MaxSpawnedZombies.description",
+          "default": 150,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1,
+          "max": 10000
+        },
+        {
+          "name": "MaxSpawnedAnimals",
+          "showName": "MaxSpawnedAnimals",
+          "description": "MaxSpawnedAnimals.description",
+          "default": 150,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1,
+          "max": 10000
+        },
+        {
+          "name": "ServerMaxAllowedViewDistance",
+          "showName": "ServerMaxAllowedViewDistance",
+          "description": "ServerMaxAllowedViewDistance.description",
+          "default": 12,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 1
+        },
+        {
+          "name": "EnemySpawnMode",
+          "showName": "EnemySpawnMode",
+          "description": "EnemySpawnMode.description",
+          "default": true,
+          "type": "SWITCH"
+        },
+        {
+          "name": "EnemyDifficulty",
+          "showName": "EnemyDifficulty",
+          "description": "EnemyDifficulty.description",
+          "default": "0",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "EnemyDifficulty.options.normal"
+            },{
+              "name": "1",
+              "label": "EnemyDifficulty.options.crazy"
+            }
+          ]
+        },
+        {
+          "name": "ZombieMove",
+          "showName": "ZombieMove",
+          "description": "ZombieMove.description",
+          "default": "1",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "ZombieMove.options.walking"
+            },{
+              "name": "1",
+              "label": "ZombieMove.options.jogging"
+            },{
+              "name": "2",
+              "label": "ZombieMove.options.running"
+            },{
+              "name": "3",
+              "label": "ZombieMove.options.sprinting"
+            },{
+              "name": "4",
+              "label": "ZombieMove.options.nightmare"
+            }
+          ]
+        },
+        {
+          "name": "ZombieMoveNight",
+          "showName": "ZombieMoveNight",
+          "description": "ZombieMoveNight.description",
+          "default": "3",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "ZombieMoveNight.options.walking"
+            },{
+              "name": "1",
+              "label": "ZombieMoveNight.options.jogging"
+            },{
+              "name": "2",
+              "label": "ZombieMoveNight.options.running"
+            },{
+              "name": "3",
+              "label": "ZombieMoveNight.options.sprinting"
+            },{
+              "name": "4",
+              "label": "ZombieMoveNight.options.nightmare"
+            }
+          ]
+        },
+        {
+          "name": "ZombieFeralMove",
+          "showName": "ZombieFeralMove",
+          "description": "ZombieFeralMove.description",
+          "default": "3",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "ZombieFeralMove.options.walking"
+            },{
+              "name": "1",
+              "label": "ZombieFeralMove.options.jogging"
+            },{
+              "name": "2",
+              "label": "ZombieFeralMove.options.running"
+            },{
+              "name": "3",
+              "label": "ZombieFeralMove.options.sprinting"
+            },{
+              "name": "4",
+              "label": "ZombieFeralMove.options.nightmare"
+            }
+          ]
+        },
+        {
+          "name": "ZombieBMMove",
+          "showName": "ZombieBMMove",
+          "description": "ZombieBMMove.description",
+          "default": "4",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "ZombieBMMove.options.walking"
+            },{
+              "name": "1",
+              "label": "ZombieBMMove.options.jogging"
+            },{
+              "name": "2",
+              "label": "ZombieBMMove.options.running"
+            },{
+              "name": "3",
+              "label": "ZombieBMMove.options.sprinting"
+            },{
+              "name": "4",
+              "label": "ZombieBMMove.options.nightmare"
+            }
+          ]
+        },
+        {
+          "name": "BloodMoonFrequency",
+          "showName": "BloodMoonFrequency",
+          "description": "BloodMoonFrequency.description",
+          "default": 10,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "BloodMoonRange",
+          "showName": "BloodMoonRange",
+          "description": "BloodMoonRange.description",
+          "default": 0,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "BloodMoonWarning",
+          "showName": "BloodMoonWarning",
+          "description": "BloodMoonWarning.description",
+          "default": 7,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "BloodMoonEnemyCount",
+          "showName": "BloodMoonEnemyCount",
+          "description": "BloodMoonEnemyCount.description",
+          "default": 8,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "LootAbundance",
+          "showName": "LootAbundance",
+          "description": "LootAbundance.description",
+          "default": 200,
+          "type": "INPUT_NUMBER",
+          "max": 99999
+        },
+        {
+          "name": "LootRespawnDays",
+          "showName": "LootRespawnDays",
+          "description": "LootRespawnDays.description",
+          "default": 30,
+          "type": "INPUT_NUMBER"
+        },
+        {
+          "name": "AirDropFrequency",
+          "showName": "AirDropFrequency",
+          "description": "AirDropFrequency.description",
+          "default": 240,
+          "type": "INPUT_NUMBER",
+          "max": 99999
+        },
+        {
+          "name": "AirDropMarker",
+          "showName": "AirDropMarker",
+          "description": "AirDropMarker.description",
+          "default": true,
+          "type": "SWITCH"
+        },
+        {
+          "name": "PartySharedKillRange",
+          "showName": "PartySharedKillRange",
+          "description": "PartySharedKillRange.description",
+          "default": 500,
+          "type": "SLIDER",
+          "min": 0,
+          "step": 50,
+          "max": 10000
+        },
+        {
+          "name": "PlayerKillingMode",
+          "showName": "PlayerKillingMode",
+          "description": "PlayerKillingMode.description",
+          "default": "0",
+          "type": "SELECT",
+          "options": [
+            {
+              "name": "0",
+              "label": "PlayerKillingMode.options.cannotKillPlayers"
+            },{
+              "name": "1",
+              "label": "PlayerKillingMode.options.killAlliesOnly"
+            },{
+              "name": "2",
+              "label": "PlayerKillingMode.options.killStrangersOnly"
+            },{
+              "name": "3",
+              "label": "PlayerKillingMode.options.killEveryone"
+            }
+          ]
+        },
+        {
+          "name": "LandClaimCount",
+          "showName": "LandClaimCount",
+          "description": "LandClaimCount.description",
+          "default": 1,
+          "type": "SLIDER",
+          "step": 1
+        },{
+          "name": "LandClaimSize",
+          "showName": "LandClaimSize",
+          "description": "LandClaimSize.description",
+          "default": 50,
+          "type": "SLIDER",
+          "step": 1,
+          "min": 0,
+          "max": 1000
+        },{
+          "name": "LandClaimDeadZone",
+          "showName": "LandClaimDeadZone",
+          "description": "LandClaimDeadZone.description",
+          "default": 50,
+          "type": "SLIDER",
+          "step": 1,
+          "min": 0,
+          "max": 1000
+        },{
+          "name": "LandClaimExpiryTime",
+          "showName": "LandClaimExpiryTime",
+          "description": "LandClaimExpiryTime.description",
+          "default": 100,
+          "type": "SLIDER",
+          "step": 1,
+          "min": 0,
+          "max": 1000
+        },{
+          "name": "LandClaimOnlineDurabilityModifier",
+          "showName": "LandClaimOnlineDurabilityModifier",
+          "description": "LandClaimOnlineDurabilityModifier.description",
+          "default": 5,
+          "type": "SLIDER",
+          "step": 1
+        },
+        {
+          "name": "LandClaimDecayMode",
+          "showName": "LandClaimDecayMode",
+          "description": "LandClaimDecayMode.description",
+          "default": 0,
+          "type": "SLIDER",
+          "step": 1
+        },
+        {
+          "name": "LandClaimOfflineDurabilityModifier",
+          "showName": "LandClaimOfflineDurabilityModifier",
+          "description": "LandClaimOfflineDurabilityModifier.description",
+          "default": 10,
+          "type": "SLIDER",
+          "step": 1
+        },{
+          "name": "LandClaimOfflineDelay",
+          "showName": "LandClaimOfflineDelay",
+          "description": "LandClaimOfflineDelay.description",
+          "default": 0,
+          "type": "SLIDER",
+          "step": 1
+        }
+      ]
+    }
+  ]
+}
