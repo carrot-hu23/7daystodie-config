@@ -1,5 +1,5 @@
 import {useController, UseControllerProps, useForm} from "react-hook-form"
-import {z} from "zod"
+import {z, ZodRawShape} from "zod"
 
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import {Button} from "@/components/ui/button.tsx";
@@ -15,8 +15,6 @@ import {useEffect, useState} from "react";
 import {ArrowBigLeftDash, ArrowBigRightDash} from "lucide-react";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
 
-import {ZodRawShape} from "zod/lib/types";
-import {toast} from "sonner";
 import {
     Dialog, DialogClose,
     DialogContent,
@@ -28,17 +26,10 @@ import {
 
 export default () => {
 
-    // const formSchema = z.object({
-    //     ServerName:  z.string().min(1, {
-    //             message: "Username must be at least 1 characters.",
-    //         }),
-    //     ControlPanelEnabled: z.boolean()
-    // })
+    const [formSchema, setFormSchema] = useState<z.ZodType<any, any, any>>()
 
-    const [formSchema, setFormSchema] = useState<ZodRawShape>()
-
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.ZodType<any, any, any>>({
+        resolver: zodResolver(formSchema || z.object({})),
         // defaultValues: async () => defaultValues,
     })
 
@@ -58,7 +49,7 @@ export default () => {
     }
 
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    function onSubmit(values: z.ZodType<any, any, any>) {
         console.log("values", values)
         console.log(convertObjectToXml(values));
     }
@@ -82,7 +73,6 @@ export default () => {
                                                          step,
                                                          defaultValue,
                                                          difficultyType,
-                                                         ...props
                                                      }) => {
         const {field} = useController({name, defaultValue: value || 0});
 
@@ -101,7 +91,7 @@ export default () => {
         };
 
         const setDefaultValue = () => {
-            setInputValue(defaultValue);
+            setInputValue(defaultValue + "");
             field.onChange(Number(defaultValue));
         }
 
@@ -114,7 +104,7 @@ export default () => {
             };
         }, [inputValue]);
 
-        const difficultyTypeArrowRenderer = (difficultyType: string) => {
+        const difficultyTypeArrowRenderer = (difficultyType: string | undefined) => {
             switch (difficultyType) {
                 case "increasing":
                     return (
@@ -212,7 +202,7 @@ export default () => {
                             schema[item2.name] = z.boolean()
                         }
                         // defaultValues[item2.name] = item2.default
-                        form.setValue(item2.name, item2.default)
+                        form.setValue(item2.name as any, item2.default)
                     })
                 })
                 setFormSchema(z.object(schema))
@@ -220,7 +210,8 @@ export default () => {
 
                 const json = localStorage.getItem("formValue")
                 const object = JSON.parse(json || "{}")
-                Object.keys(object).map(key=>{
+                Object.keys(object).map(key => {
+                    // @ts-ignore
                     form.setValue(key, object[key])
                 })
 
@@ -228,10 +219,11 @@ export default () => {
                 console.error('Error loading config.json:', error);
             }
         }
+
         loadConfig();
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
 
     }, [])
 
@@ -259,7 +251,7 @@ export default () => {
                                             <DialogTrigger asChild>
                                                 <Button type="submit" onClick={() => {
                                                     try {
-                                                        const validatedData = formSchema.parse(form.getValues());
+                                                        const validatedData = formSchema?.parse(form.getValues());
                                                         localStorage.setItem("formValue", JSON.stringify(form.getValues()))
                                                         setServerSettings(convertObjectToXml(form.getValues()))
                                                         console.log(validatedData)
@@ -293,16 +285,12 @@ export default () => {
                                                         <FormField
                                                             key={item.name}
                                                             control={form.control}
-                                                            name={item.name}
+                                                            name={item.name as any}
                                                             render={({field}) => (
                                                                 <FormItem>
                                                                     <FormLabel>{item.showName}</FormLabel>
                                                                     <FormControl>
                                                                         <Input
-                                                                            {...form.register(item.name, {
-                                                                                required: true,
-                                                                                valueAsNumber: true
-                                                                            })}
                                                                             type={'number'}
                                                                             placeholder={item.placeholder} {...field} />
                                                                     </FormControl>
@@ -323,7 +311,7 @@ export default () => {
                                                         <FormField
                                                             key={item.name}
                                                             control={form.control}
-                                                            name={item.name}
+                                                            name={item.name as any}
                                                             render={({field}) => (
                                                                 <FormItem>
                                                                     <FormLabel>{item.showName}</FormLabel>
@@ -348,7 +336,7 @@ export default () => {
                                                         <FormField
                                                             key={item.name}
                                                             control={form.control}
-                                                            name={item.name}
+                                                            name={item.name as any}
                                                             render={({field}) => (
                                                                 <FormItem>
                                                                     <FormLabel>{item.showName}</FormLabel>
@@ -373,7 +361,7 @@ export default () => {
                                                         <FormField
                                                             key={item.name}
                                                             control={form.control}
-                                                            name={item.name}
+                                                            name={item.name as any}
                                                             render={({field}) => (
                                                                 <FormItem>
                                                                     <div
@@ -404,7 +392,7 @@ export default () => {
                                                         <FormField
                                                             key={item.name}
                                                             control={form.control}
-                                                            name={item.name}
+                                                            name={item.name as any}
                                                             render={({field}) => (
                                                                 <FormItem>
                                                                     <div
@@ -445,8 +433,8 @@ export default () => {
                                                         <FormField
                                                             key={item.name}
                                                             control={form.control}
-                                                            name={item.name}
-                                                            render={({field}) => (
+                                                            name={item.name as any}
+                                                            render={() => (
                                                                 <FormItem>
                                                                     <SliderInput showName={item.showName}
                                                                                  name={item.name}
@@ -458,7 +446,7 @@ export default () => {
                                                                     {item.description && (
                                                                         <FormDescription
                                                                             style={{wordWrap: 'break-word'}}>
-                                                                             {item.description}
+                                                                            {item.description}
                                                                         </FormDescription>
                                                                     )}
                                                                     <FormMessage/>
