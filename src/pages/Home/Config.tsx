@@ -229,23 +229,23 @@ export default () => {
 
     return (
         <Dialog>
-            <main className={'flex flex-col items-center min-h-screen bg-gray-100 dark:bg-black p-4'}>
-                <Card className={'w-full dark:border-none mt-2 dark:rounded-lg dark:bg-neutral-900'}>
+            <main style={{
+                background: 'url(https://cdnimg-v2.gamekee.com/wiki2.0/images/w_2560/h_1686/50311/458106/2023/11/15/512091.jpg) 50% 0px / cover no-repeat fixed'
+            }} className={'flex flex-col items-center min-h-screen bg-gray-100 dark:bg-black p-4'}>
+                <Card className={'w-full max-w-7xl dark:border-none mt-2 dark:rounded-lg dark:bg-neutral-900'}>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} onChange={() => {
-                            // setTimeout(() => {
-                            //     setServerSettings(convertObjectToXml(form.getValues()))
-                            // }, 500)
-                        }}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            onChange={() => {
+
+                            }}
+                        >
                             <CardHeader className={'w-full sticky top-0 z-10 dark:bg-neutral-900 rounded-lg'}>
                                 <div>
                                     <div className={'flex justify-between'}>
                                         <div>
-                                            <CardTitle className="flex">
-                                                <div className="leading-10">
-                                                    <p className={'leading-10'}>{config?.title}</p>
-                                                </div>
-                                            </CardTitle>
+                                            <img
+                                                src={'https://cdnimg-v2.gamekee.com/wiki2.0/images/w_1024/h_439/50311/458106/2023/11/15/216080.png?x-image-process=image/resize,m_lfit,h_200,w_200&image_process=resize,mid,w_200,h_200'}/>
                                         </div>
                                         <div>
                                             <DialogTrigger asChild>
