@@ -6,7 +6,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {GenFormProp, GenInputType} from "@/pages/type.ts";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Card, CardContent, CardDescription, CardHeader} from "@/components/ui/card.tsx";
 import {Switch} from "@/components/ui/switch.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Textarea} from "@/components/ui/textarea.tsx";
